@@ -1,15 +1,21 @@
 package pages;
 
-import com.codeborne.selenide.SelenideElement;
-import framework.annotations.locators.Find;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends PageObject{
 
-    @Find(id = "query")
-    private SelenideElement a;
+    @FindBy(id = "query")
+    private WebElement a;
+
+    public HomePage(WebDriver driver, WebDriverWait wait) {
+        super(driver, wait);
+    }
 
     public HomePage clickSubmit() {
-        a.sendKeys("aaa");
+        super.waitAndSendKeys(a, "aaaaaaaaaaaaaaaaaaa");
         return this;
     }
 }

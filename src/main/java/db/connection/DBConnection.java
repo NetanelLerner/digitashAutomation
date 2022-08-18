@@ -1,5 +1,6 @@
-package db;
+package db.connection;
 
+import api.framework.Config;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
@@ -14,12 +15,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static api.framework.Config.*;
+
 @Slf4j
 public class DBConnection {
-
-    private static final String CONNECTION_STRING = "jdbc:postgresql://tash-nonprod.postgres.database.azure.com:5432/postgres";
-    private static final String SERVER_USERNAME = "tashadmin@tash-nonprod";
-    private static final String SERVER_PASSWORD = "Rt14725836s!@";
 
     private static final ThreadLocal<Connection> conn = new ThreadLocal<>();
 
@@ -30,9 +29,9 @@ public class DBConnection {
     // TODO: Lazy-create DataSources
     static {
         config = new HikariConfig();
-        config.setJdbcUrl(CONNECTION_STRING);
-        config.setUsername(SERVER_USERNAME);
-        config.setPassword(SERVER_PASSWORD);
+        config.setJdbcUrl(dbConnectionString);
+        config.setUsername(serverUsername);
+        config.setPassword(serverPassword);
         config.setIdleTimeout(15);
         config.setMaximumPoolSize(5);
         config.addDataSourceProperty( "cachePrepStmts" , "true" );

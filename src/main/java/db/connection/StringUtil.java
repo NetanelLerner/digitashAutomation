@@ -1,4 +1,4 @@
-package db;
+package db.connection;
 
 public class StringUtil {
     public static String quoteOrNull(Object object) {
